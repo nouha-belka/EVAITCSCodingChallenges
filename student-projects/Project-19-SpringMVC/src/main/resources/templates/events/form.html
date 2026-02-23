@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Create/Edit Event</title>
+</head>
+<body>
+    <h1>Create/Edit Event</h1>
+
+    <!-- TODO 1: Build the Thymeleaf form with validation error display -->
+    <!--
+    <form th:action="@{/events}" th:object="${event}" method="post">
+
+        <div>
+            <label for="name">Event Name:</label>
+            <input type="text" id="name" th:field="*{name}" />
+            <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}" style="color:red"></span>
+        </div>
+
+        <div>
+            <label for="description">Description:</label>
+            <textarea id="description" th:field="*{description}"></textarea>
+            <span th:if="${#fields.hasErrors('description')}" th:errors="*{description}" style="color:red"></span>
+        </div>
+
+        <div>
+            <label for="eventDate">Date:</label>
+            <input type="date" id="eventDate" th:field="*{eventDate}" />
+            <span th:if="${#fields.hasErrors('eventDate')}" th:errors="*{eventDate}" style="color:red"></span>
+        </div>
+
+        <div>
+            <label for="location">Location:</label>
+            <input type="text" id="location" th:field="*{location}" />
+        </div>
+
+        <div>
+            <label for="maxAttendees">Max Attendees:</label>
+            <input type="number" id="maxAttendees" th:field="*{maxAttendees}" />
+        </div>
+
+        <div>
+            <label for="category">Category:</label>
+            <select id="category" th:field="*{category}">
+                <option value="Conference">Conference</option>
+                <option value="Workshop">Workshop</option>
+                <option value="Social">Social</option>
+                <option value="Sports">Sports</option>
+            </select>
+        </div>
+
+        <button type="submit">Save Event</button>
+        <a href="/events">Cancel</a>
+    </form>
+    -->
+</body>
+</html>
+

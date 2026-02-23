@@ -1,0 +1,17 @@
+{
+  "name": "project-23-typescript-fundamentals",
+  "version": "1.0.0",
+  "description": "Task Tracker — TypeScript Fundamentals",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "ts-node src/index.ts",
+    "dev": "ts-node-dev --respawn src/index.ts"
+  },
+  "devDependencies": {
+    "typescript": "^5.3.3",
+    "ts-node": "^10.9.2",
+    "@types/node": "^20.11.5"
+  }
+}
+

@@ -1,0 +1,78 @@
+# ============================================================================
+# Docker Compose — Full stack: Backend + Frontend + DB + Redis + Kafka
+# ============================================================================
+#
+# Run: docker-compose up -d
+# Stop: docker-compose down
+# ============================================================================
+
+version: '3.8'
+
+services:
+  # TODO 1: Spring Boot backend
+  # backend:
+  #   build:
+  #     context: ../backend
+  #     dockerfile: ../docker/Dockerfile.backend
+  #   ports:
+  #     - "8080:8080"
+  #   environment:
+  #     - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/blogdb
+  #     - SPRING_DATASOURCE_USERNAME=postgres
+  #     - SPRING_DATASOURCE_PASSWORD=postgres
+  #     - SPRING_REDIS_HOST=redis
+  #     - SPRING_KAFKA_BOOTSTRAP_SERVERS=kafka:9092
+  #   depends_on:
+  #     - db
+  #     - redis
+  #     - kafka
+
+  # TODO 2: React frontend
+  # frontend:
+  #   build:
+  #     context: ../frontend
+  #     dockerfile: ../docker/Dockerfile.frontend
+  #   ports:
+  #     - "80:80"
+  #   depends_on:
+  #     - backend
+
+  # TODO 3: PostgreSQL database
+  # db:
+  #   image: postgres:16-alpine
+  #   environment:
+  #     POSTGRES_DB: blogdb
+  #     POSTGRES_USER: postgres
+  #     POSTGRES_PASSWORD: postgres
+  #   ports:
+  #     - "5432:5432"
+  #   volumes:
+  #     - pgdata:/var/lib/postgresql/data
+
+  # TODO 4: Redis cache
+  # redis:
+  #   image: redis:7-alpine
+  #   ports:
+  #     - "6379:6379"
+
+  # TODO 5: Kafka + Zookeeper
+  # zookeeper:
+  #   image: confluentinc/cp-zookeeper:7.5.3
+  #   environment:
+  #     ZOOKEEPER_CLIENT_PORT: 2181
+  #
+  # kafka:
+  #   image: confluentinc/cp-kafka:7.5.3
+  #   ports:
+  #     - "9092:9092"
+  #   environment:
+  #     KAFKA_BROKER_ID: 1
+  #     KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+  #     KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092
+  #     KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+  #   depends_on:
+  #     - zookeeper
+
+# volumes:
+#   pgdata:
+

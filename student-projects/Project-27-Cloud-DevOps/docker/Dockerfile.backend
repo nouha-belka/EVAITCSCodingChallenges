@@ -1,0 +1,30 @@
+# ============================================================================
+# Dockerfile.backend — Multi-stage build for Spring Boot
+# ============================================================================
+#
+# MULTI-STAGE BUILD:
+#   Stage 1 (build): Compile the Java app using Maven
+#   Stage 2 (run):   Copy only the JAR into a slim JDK image
+#   Result: Small production image (~200MB instead of ~500MB)
+#
+# INTERVIEW TIP:
+# "I use multi-stage Docker builds to keep production images small.
+#  The build stage compiles with Maven, and the run stage only contains
+#  the JAR and a slim JDK runtime."
+# ============================================================================
+
+# TODO 1: Stage 1 — Build
+# FROM maven:3.9-eclipse-temurin-17 AS build
+# WORKDIR /app
+# COPY pom.xml .
+# RUN mvn dependency:go-offline          # Cache dependencies
+# COPY src ./src
+# RUN mvn package -DskipTests            # Build the JAR
+
+# TODO 2: Stage 2 — Run
+# FROM eclipse-temurin:17-jre-alpine
+# WORKDIR /app
+# COPY --from=build /app/target/*.jar app.jar
+# EXPOSE 8080
+# ENTRYPOINT ["java", "-jar", "app.jar"]
+

@@ -1,0 +1,58 @@
+// ============================================================================
+// Jenkinsfile — Jenkins Pipeline as Code
+// ============================================================================
+//
+// INTERVIEW TIP:
+// "I define CI/CD pipelines as code using Jenkinsfile. This is version-
+//  controlled alongside the source code and supports parallel stages."
+// ============================================================================
+
+// TODO 1: Define the pipeline
+// pipeline {
+//     agent any
+//
+//     tools {
+//         maven 'Maven-3.9'
+//         jdk 'JDK-17'
+//         nodejs 'Node-20'
+//     }
+//
+//     stages {
+//         stage('Backend - Build & Test') {
+//             steps {
+//                 dir('backend') {
+//                     sh 'mvn clean verify'
+//                 }
+//             }
+//         }
+//
+//         stage('Frontend - Build') {
+//             steps {
+//                 dir('frontend') {
+//                     sh 'npm ci'
+//                     sh 'npm run build'
+//                 }
+//             }
+//         }
+//
+//         stage('Docker Build') {
+//             steps {
+//                 sh 'docker build -t blog-backend:latest -f docker/Dockerfile.backend backend/'
+//                 sh 'docker build -t blog-frontend:latest -f docker/Dockerfile.frontend frontend/'
+//             }
+//         }
+//
+//         stage('Deploy') {
+//             when { branch 'main' }
+//             steps {
+//                 sh 'docker-compose -f docker/docker-compose.yml up -d'
+//             }
+//         }
+//     }
+//
+//     post {
+//         success { echo 'Pipeline succeeded!' }
+//         failure { echo 'Pipeline failed!' }
+//     }
+// }
+
