@@ -1,4 +1,22 @@
 -------------------------------------------------------------------------------
 Test set: com.evaitcs.unittesting.ShoppingCartTest
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.123 s -- in com.evaitcs.unittesting.ShoppingCartTest
+Tests run: 18, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.124 s <<< FAILURE! -- in com.evaitcs.unittesting.ShoppingCartTest
+com.evaitcs.unittesting.ShoppingCartTest.addItem_duplicateProduct_quantityIncreases -- Time elapsed: 0.029 s <<< ERROR!
+java.lang.NullPointerException: Cannot invoke "String.equals(Object)" because the return value of "com.evaitcs.unittesting.CartItem.getProductId()" is null
+	at com.evaitcs.unittesting.ShoppingCart.lambda$0(ShoppingCart.java:43)
+	at java.base/java.util.stream.ReferencePipeline$2$1.accept(ReferencePipeline.java:196)
+	at java.base/java.util.ArrayList$ArrayListSpliterator.tryAdvance(ArrayList.java:1693)
+	at java.base/java.util.stream.ReferencePipeline.forEachWithCancel(ReferencePipeline.java:147)
+	at java.base/java.util.stream.AbstractPipeline.copyIntoWithCancel(AbstractPipeline.java:588)
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:574)
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:560)
+	at java.base/java.util.stream.FindOps$FindOp.evaluateSequential(FindOps.java:150)
+	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:265)
+	at java.base/java.util.stream.ReferencePipeline.findFirst(ReferencePipeline.java:683)
+	at com.evaitcs.unittesting.ShoppingCart.addItem(ShoppingCart.java:44)
+	at com.evaitcs.unittesting.ShoppingCartTest.addItem_duplicateProduct_quantityIncreases(ShoppingCartTest.java:107)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1604)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1604)
+

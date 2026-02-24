@@ -31,7 +31,7 @@ public class CartItem {
         if(quantity < 1 ){
             throw new IllegalArgumentException("Quantity can't be less than 1");
         }
-        this.name = name;
+        this.productId = productId;
         this.name = name;
         this.price = price;
         this.quantity = quantity;

@@ -96,16 +96,16 @@ class ShoppingCartTest {
     @DisplayName("addItem: Adding duplicate product increases quantity")
     void addItem_duplicateProduct_quantityIncreases() {
         // Arrange
-        // CartItem item1 = new CartItem("P001", "Laptop", 999.99, 1);
-        // CartItem item2 = new CartItem("P001", "Laptop", 999.99, 2);
+        CartItem item1 = new CartItem("P001", "Laptop", 999.99, 1);
+        CartItem item2 = new CartItem("P001", "Laptop", 999.99, 2);
 
         // Act
-        // cart.addItem(item1);
-        // cart.addItem(item2);
+        cart.addItem(item1);
+        cart.addItem(item2);
 
         // Assert — should be 1 unique item with quantity 3
-        // assertEquals(1, cart.getItemCount(), "Should still be 1 unique item");
-        // assertEquals(3, cart.getTotalQuantity(), "Quantity should be 3");
+        assertEquals(1, cart.getItemCount(), "Should still be 1 unique item");
+        assertEquals(3, cart.getTotalQuantity(), "Quantity should be 3");
     }
 
     // =========================================================================

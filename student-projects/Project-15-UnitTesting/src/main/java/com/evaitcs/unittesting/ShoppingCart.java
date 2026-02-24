@@ -43,7 +43,7 @@ public class ShoppingCart {
                     .filter(x -> x.getProductId().equals(item.getProductId()) )
                     .findFirst()
                     .ifPresentOrElse(
-                        x -> x.setQuantity(x.getQuantity() + 1), 
+                        x -> x.setQuantity(x.getQuantity() + item.getQuantity()), 
                         () -> this.items.add(item)
                     );
         // this.items.add(item);
@@ -87,7 +87,8 @@ public class ShoppingCart {
      */
     public int getTotalQuantity() {
         // TODO: Sum all item quantities
-        return 0; // Replace this line
+        
+        return items.stream().mapToInt(CartItem::getQuantity).sum(); // Replace this line
     }
 
     /**

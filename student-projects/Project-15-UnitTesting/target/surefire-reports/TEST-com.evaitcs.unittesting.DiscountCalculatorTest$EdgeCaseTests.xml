@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.evaitcs.unittesting.ShoppingCartTest" time="0.124" tests="18" errors="1" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.evaitcs.unittesting.DiscountCalculatorTest$EdgeCaseTests" time="0.01" tests="33" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="25"/>
     <property name="sun.cpu.isalist" value="amd64"/>
@@ -59,43 +59,37 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="69.0"/>
   </properties>
-  <testcase name="applyDiscount_validPercent_calculatesCorrectly" classname="com.evaitcs.unittesting.ShoppingCartTest" time="0.001"/>
-  <testcase name="cartItem_negativePrice_throwsException" classname="com.evaitcs.unittesting.ShoppingCartTest" time="0.001"/>
-  <testcase name="removeItem_nonExistentItem_returnsFalse" classname="com.evaitcs.unittesting.ShoppingCartTest" time="0.001"/>
-  <testcase name="applyDiscount_hundredPercent_returnsZero" classname="com.evaitcs.unittesting.ShoppingCartTest" time="0.001"/>
-  <testcase name="addItem_validItem_itemIsAdded" classname="com.evaitcs.unittesting.ShoppingCartTest" time="0.02"/>
-  <testcase name="getTotal_emptyCart_returnsZero" classname="com.evaitcs.unittesting.ShoppingCartTest" time="0.002"/>
-  <testcase name="clear_afterAddingItems_cartIsEmpty" classname="com.evaitcs.unittesting.ShoppingCartTest" time="0.002"/>
-  <testcase name="findItem_nonExistentItem_returnsEmpty" classname="com.evaitcs.unittesting.ShoppingCartTest" time="0.004"/>
-  <testcase name="applyDiscount_zeroPercent_returnsOriginalTotal" classname="com.evaitcs.unittesting.ShoppingCartTest" time="0.002"/>
-  <testcase name="cartItem_zeroQuantity_throwsException" classname="com.evaitcs.unittesting.ShoppingCartTest" time="0.005"/>
-  <testcase name="applyDiscount_negativePercent_throwsException" classname="com.evaitcs.unittesting.ShoppingCartTest" time="0.009"/>
-  <testcase name="isEmpty_newCart_returnsTrue" classname="com.evaitcs.unittesting.ShoppingCartTest" time="0.004"/>
-  <testcase name="addItem_nullItem_throwsException" classname="com.evaitcs.unittesting.ShoppingCartTest" time="0.003"/>
-  <testcase name="removeItem_existingItem_returnsTrue" classname="com.evaitcs.unittesting.ShoppingCartTest" time="0.001"/>
-  <testcase name="findItem_existingItem_returnsPresent" classname="com.evaitcs.unittesting.ShoppingCartTest" time="0.0"/>
-  <testcase name="applyDiscount_over100Percent_throwsException" classname="com.evaitcs.unittesting.ShoppingCartTest" time="0.001"/>
-  <testcase name="addItem_duplicateProduct_quantityIncreases" classname="com.evaitcs.unittesting.ShoppingCartTest" time="0.029">
-    <error message="Cannot invoke &quot;String.equals(Object)&quot; because the return value of &quot;com.evaitcs.unittesting.CartItem.getProductId()&quot; is null" type="java.lang.NullPointerException"><![CDATA[java.lang.NullPointerException: Cannot invoke "String.equals(Object)" because the return value of "com.evaitcs.unittesting.CartItem.getProductId()" is null
-	at com.evaitcs.unittesting.ShoppingCart.lambda$0(ShoppingCart.java:43)
-	at java.base/java.util.stream.ReferencePipeline$2$1.accept(ReferencePipeline.java:196)
-	at java.base/java.util.ArrayList$ArrayListSpliterator.tryAdvance(ArrayList.java:1693)
-	at java.base/java.util.stream.ReferencePipeline.forEachWithCancel(ReferencePipeline.java:147)
-	at java.base/java.util.stream.AbstractPipeline.copyIntoWithCancel(AbstractPipeline.java:588)
-	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:574)
-	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:560)
-	at java.base/java.util.stream.FindOps$FindOp.evaluateSequential(FindOps.java:150)
-	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:265)
-	at java.base/java.util.stream.ReferencePipeline.findFirst(ReferencePipeline.java:683)
-	at com.evaitcs.unittesting.ShoppingCart.addItem(ShoppingCart.java:44)
-	at com.evaitcs.unittesting.ShoppingCartTest.addItem_duplicateProduct_quantityIncreases(ShoppingCartTest.java:107)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
-	at java.base/java.util.ArrayList.forEach(ArrayList.java:1604)
-	at java.base/java.util.ArrayList.forEach(ArrayList.java:1604)
-]]></error>
-    <system-out><![CDATA[null
-hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhnull
-]]></system-out>
-  </testcase>
-  <testcase name="getTotal_multipleItems_calculatesCorrectly" classname="com.evaitcs.unittesting.ShoppingCartTest" time="0.001"/>
+  <testcase name="getDiscountPercent_negativeTotal_throwsException" classname="com.evaitcs.unittesting.DiscountCalculatorTest" time="0.077"/>
+  <testcase name="isValidPromoCode_nullCode_returnsFalse" classname="com.evaitcs.unittesting.DiscountCalculatorTest" time="0.004"/>
+  <testcase name="getPromoDiscount_validCodes_returnsCorrectDiscount(String, double)[1]" classname="com.evaitcs.unittesting.DiscountCalculatorTest" time="0.064"/>
+  <testcase name="getPromoDiscount_validCodes_returnsCorrectDiscount(String, double)[2]" classname="com.evaitcs.unittesting.DiscountCalculatorTest" time="0.002"/>
+  <testcase name="getPromoDiscount_validCodes_returnsCorrectDiscount(String, double)[3]" classname="com.evaitcs.unittesting.DiscountCalculatorTest" time="0.002"/>
+  <testcase name="getDiscountPercent_variousTotals_returnsCorrectDiscount(double, double)[1]" classname="com.evaitcs.unittesting.DiscountCalculatorTest" time="0.007"/>
+  <testcase name="getDiscountPercent_variousTotals_returnsCorrectDiscount(double, double)[2]" classname="com.evaitcs.unittesting.DiscountCalculatorTest" time="0.001"/>
+  <testcase name="getDiscountPercent_variousTotals_returnsCorrectDiscount(double, double)[3]" classname="com.evaitcs.unittesting.DiscountCalculatorTest" time="0.002"/>
+  <testcase name="getDiscountPercent_variousTotals_returnsCorrectDiscount(double, double)[4]" classname="com.evaitcs.unittesting.DiscountCalculatorTest" time="0.001"/>
+  <testcase name="getDiscountPercent_variousTotals_returnsCorrectDiscount(double, double)[5]" classname="com.evaitcs.unittesting.DiscountCalculatorTest" time="0.002"/>
+  <testcase name="getDiscountPercent_variousTotals_returnsCorrectDiscount(double, double)[6]" classname="com.evaitcs.unittesting.DiscountCalculatorTest" time="0.002"/>
+  <testcase name="getDiscountPercent_variousTotals_returnsCorrectDiscount(double, double)[7]" classname="com.evaitcs.unittesting.DiscountCalculatorTest" time="0.001"/>
+  <testcase name="getDiscountPercent_variousTotals_returnsCorrectDiscount(double, double)[8]" classname="com.evaitcs.unittesting.DiscountCalculatorTest" time="0.001"/>
+  <testcase name="getPromoDiscount_invalidCode_throwsException" classname="com.evaitcs.unittesting.DiscountCalculatorTest" time="0.001"/>
+  <testcase name="isValidPromoCode_invalidCodes_returnsFalse(String)[1]" classname="com.evaitcs.unittesting.DiscountCalculatorTest" time="0.004"/>
+  <testcase name="isValidPromoCode_invalidCodes_returnsFalse(String)[2]" classname="com.evaitcs.unittesting.DiscountCalculatorTest" time="0.002"/>
+  <testcase name="isValidPromoCode_invalidCodes_returnsFalse(String)[3]" classname="com.evaitcs.unittesting.DiscountCalculatorTest" time="0.001"/>
+  <testcase name="isValidPromoCode_invalidCodes_returnsFalse(String)[4]" classname="com.evaitcs.unittesting.DiscountCalculatorTest" time="0.001"/>
+  <testcase name="getDiscountPercent_boundaryValues_returnsCorrectDiscount(double, double)[1]" classname="com.evaitcs.unittesting.DiscountCalculatorTest" time="0.001"/>
+  <testcase name="getDiscountPercent_boundaryValues_returnsCorrectDiscount(double, double)[2]" classname="com.evaitcs.unittesting.DiscountCalculatorTest" time="0.001"/>
+  <testcase name="getDiscountPercent_boundaryValues_returnsCorrectDiscount(double, double)[3]" classname="com.evaitcs.unittesting.DiscountCalculatorTest" time="0.002"/>
+  <testcase name="getDiscountPercent_boundaryValues_returnsCorrectDiscount(double, double)[4]" classname="com.evaitcs.unittesting.DiscountCalculatorTest" time="0.001"/>
+  <testcase name="getDiscountPercent_boundaryValues_returnsCorrectDiscount(double, double)[5]" classname="com.evaitcs.unittesting.DiscountCalculatorTest" time="0.001"/>
+  <testcase name="getDiscountPercent_boundaryValues_returnsCorrectDiscount(double, double)[6]" classname="com.evaitcs.unittesting.DiscountCalculatorTest" time="0.001"/>
+  <testcase name="calculateFinalPrice_variousTotals_calculatesCorrectly(double, double)[1]" classname="com.evaitcs.unittesting.DiscountCalculatorTest" time="0.001"/>
+  <testcase name="calculateFinalPrice_variousTotals_calculatesCorrectly(double, double)[2]" classname="com.evaitcs.unittesting.DiscountCalculatorTest" time="0.001"/>
+  <testcase name="calculateFinalPrice_variousTotals_calculatesCorrectly(double, double)[3]" classname="com.evaitcs.unittesting.DiscountCalculatorTest" time="0.001"/>
+  <testcase name="calculateFinalPrice_variousTotals_calculatesCorrectly(double, double)[4]" classname="com.evaitcs.unittesting.DiscountCalculatorTest" time="0.001"/>
+  <testcase name="isValidPromoCode_validCodes_returnsTrue(String)[1]" classname="com.evaitcs.unittesting.DiscountCalculatorTest" time="0.002"/>
+  <testcase name="isValidPromoCode_validCodes_returnsTrue(String)[2]" classname="com.evaitcs.unittesting.DiscountCalculatorTest" time="0.001"/>
+  <testcase name="isValidPromoCode_validCodes_returnsTrue(String)[3]" classname="com.evaitcs.unittesting.DiscountCalculatorTest" time="0.001"/>
+  <testcase name="getDiscountPercent_veryLargeTotal_returns20" classname="com.evaitcs.unittesting.DiscountCalculatorTest$EdgeCaseTests" time="0.001"/>
+  <testcase name="calculateFinalPrice_zeroTotal_returnsZero" classname="com.evaitcs.unittesting.DiscountCalculatorTest$EdgeCaseTests" time="0.002"/>
 </testsuite>
