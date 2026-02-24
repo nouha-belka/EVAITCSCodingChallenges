@@ -1,0 +1,4 @@
+com\evaitcs\bookcatalog\BookCatalogApplication.class
+com\evaitcs\bookcatalog\model\Book.class
+com\evaitcs\bookcatalog\controller\BookController.class
+com\evaitcs\bookcatalog\service\BookService.class

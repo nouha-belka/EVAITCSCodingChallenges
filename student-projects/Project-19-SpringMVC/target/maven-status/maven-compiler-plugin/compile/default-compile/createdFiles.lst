@@ -1,0 +1,3 @@
+com\evaitcs\eventplanner\EventPlannerApplication.class
+com\evaitcs\eventplanner\controller\EventController.class
+com\evaitcs\eventplanner\model\Event.class

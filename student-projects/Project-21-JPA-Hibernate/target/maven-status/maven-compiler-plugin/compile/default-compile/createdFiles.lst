@@ -1,0 +1,7 @@
+com\evaitcs\studentdb\service\StudentService.class
+com\evaitcs\studentdb\entity\Student.class
+com\evaitcs\studentdb\repository\CourseRepository.class
+com\evaitcs\studentdb\StudentDbApplication.class
+com\evaitcs\studentdb\repository\StudentRepository.class
+com\evaitcs\studentdb\entity\Course.class
+com\evaitcs\studentdb\controller\StudentController.class

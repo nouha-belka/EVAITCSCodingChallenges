@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Events</title>
+    <!-- TODO 1: Add basic CSS styling (inline or linked) -->
+</head>
+<body>
+    <h1>Event Planner</h1>
+    <a href="/events/new">Create New Event</a>
+
+    <!-- TODO 2: Display the list of events using Thymeleaf iteration -->
+    <!--
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Date</th>
+                <th>Location</th>
+                <th>Attendees</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="event : ${events}">
+                <td><a th:href="@{/events/{id}(id=${event.id})}" th:text="${event.name}">Event Name</a></td>
+                <td th:text="${event.eventDate}">2026-01-01</td>
+                <td th:text="${event.location}">Location</td>
+                <td th:text="${event.maxAttendees}">100</td>
+                <td>
+                    <a th:href="@{/events/{id}/edit(id=${event.id})}">Edit</a>
+                    <form th:action="@{/events/{id}/delete(id=${event.id})}" method="post" style="display:inline">
+                        <button type="submit">Delete</button>
+                    </form>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    -->
+
+    <!-- TODO 3: Show a message when no events exist -->
+    <!--
+    <p th:if="${#lists.isEmpty(events)}">No events yet. Create one!</p>
+    -->
+</body>
+</html>
+

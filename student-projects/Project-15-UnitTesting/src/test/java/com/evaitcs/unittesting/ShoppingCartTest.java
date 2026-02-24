@@ -1,7 +1,11 @@
 package com.evaitcs.unittesting;
 
-import org.junit.jupiter.api.*;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 
 /**
  * ============================================================================
@@ -57,14 +61,18 @@ class ShoppingCartTest {
     @DisplayName("addItem: Adding a valid item increases cart size")
     void addItem_validItem_itemIsAdded() {
         // Arrange
+        CartItem item = new CartItem("123", "Nouha", 123.0, 5);
         // CartItem item = new CartItem("P001", "Laptop", 999.99, 1);
-
+        
         // Act
         // cart.addItem(item);
-
+        cart.addItem(item);
+        
         // Assert
         // assertEquals(1, cart.getItemCount(), "Cart should have 1 item");
+        assertEquals(1, cart.getItemCount(),"1 item in cart");
         // assertFalse(cart.isEmpty(), "Cart should not be empty");
+        assertFalse(cart.isEmpty(), "Cart should not be empty");
     }
 
     /**
@@ -73,6 +81,9 @@ class ShoppingCartTest {
     @Test
     @DisplayName("addItem: Adding null item throws IllegalArgumentException")
     void addItem_nullItem_throwsException() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            cart.addItem(null);
+        });
         // assertThrows(IllegalArgumentException.class, () -> {
         //     cart.addItem(null);
         // });

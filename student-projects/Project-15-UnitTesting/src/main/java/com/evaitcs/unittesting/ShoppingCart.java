@@ -21,6 +21,9 @@ public class ShoppingCart {
 
     // TODO 1: Create a constructor that initializes items as empty ArrayList
     // YOUR CONSTRUCTOR HERE
+    public ShoppingCart(){
+        items = new ArrayList<>();
+    }
 
 
     /**
@@ -33,6 +36,17 @@ public class ShoppingCart {
      */
     public void addItem(CartItem item) {
         // TODO: Implement — check for duplicate productId
+        if(item ==null){
+            throw new IllegalArgumentException("Item can't be null");
+        }
+        this.items.stream()
+                    .filter(x -> x.getProductId().equals(item.getProductId()) )
+                    .findFirst()
+                    .ifPresentOrElse(
+                        x -> x.setQuantity(x.getQuantity() + 1), 
+                        () -> this.items.add(item)
+                    );
+        // this.items.add(item);
     }
 
     /**
@@ -63,7 +77,7 @@ public class ShoppingCart {
      */
     public int getItemCount() {
         // TODO: Return items.size()
-        return 0; // Replace this line
+        return items.size(); // Replace this line
     }
 
     /**
@@ -101,7 +115,7 @@ public class ShoppingCart {
      */
     public boolean isEmpty() {
         // TODO: Return whether items list is empty
-        return true; // Replace this line
+        return items.isEmpty(); // Replace this line
     }
 
     /**

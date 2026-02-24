@@ -1,0 +1,8 @@
+com\evaitcs\jobboard\entity\Application.class
+com\evaitcs\jobboard\entity\Company.class
+com\evaitcs\jobboard\repository\JobRepository.class
+com\evaitcs\jobboard\JobBoardApplication.class
+com\evaitcs\jobboard\entity\User.class
+com\evaitcs\jobboard\controller\JobController.class
+com\evaitcs\jobboard\entity\Job.class
+com\evaitcs\jobboard\service\JobService.class

@@ -1,0 +1,6 @@
+com\evaitcs\productapi\ProductApiApplication.class
+com\evaitcs\productapi\controller\ProductController.class
+com\evaitcs\productapi\service\ProductService.class
+com\evaitcs\productapi\aspect\LoggingAspect.class
+com\evaitcs\productapi\model\Product.class
+com\evaitcs\productapi\exception\GlobalExceptionHandler.class
