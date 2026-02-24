@@ -57,7 +57,8 @@ public class ShoppingCart {
      */
     public boolean removeItem(String productId) {
         // TODO: Implement
-        return false; // Replace this line
+
+        return items.removeIf(x -> x.getProductId().equals(productId)); // Replace this line
     }
 
     /**

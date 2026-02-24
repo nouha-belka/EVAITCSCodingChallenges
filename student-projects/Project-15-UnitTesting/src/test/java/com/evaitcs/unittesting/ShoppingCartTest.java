@@ -3,6 +3,7 @@ package com.evaitcs.unittesting;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -119,12 +120,16 @@ class ShoppingCartTest {
     @DisplayName("removeItem: Removing existing item returns true")
     void removeItem_existingItem_returnsTrue() {
         // Arrange
+        cart.addItem(new CartItem("P001", "Laptop", 999.99, 1));
         // cart.addItem(new CartItem("P001", "Laptop", 999.99, 1));
-
+        
         // Act
+        boolean removed = cart.removeItem("P001");
         // boolean removed = cart.removeItem("P001");
 
         // Assert
+        assertTrue(removed, "should return true" );
+        assertTrue(cart.isEmpty(), "Should return true, car is empty after removal");
         // assertTrue(removed, "Should return true for existing item");
         // assertTrue(cart.isEmpty(), "Cart should be empty after removal");
     }
@@ -135,8 +140,8 @@ class ShoppingCartTest {
     @Test
     @DisplayName("removeItem: Removing non-existent item returns false")
     void removeItem_nonExistentItem_returnsFalse() {
-        // boolean removed = cart.removeItem("FAKE_ID");
-        // assertFalse(removed, "Should return false for non-existent item");
+        boolean removed = cart.removeItem("FAKE_ID");
+        assertFalse(removed, "Should return false for non-existent item");
     }
 
     // =========================================================================
