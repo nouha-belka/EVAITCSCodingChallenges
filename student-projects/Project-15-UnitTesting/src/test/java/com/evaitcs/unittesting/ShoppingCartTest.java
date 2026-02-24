@@ -155,14 +155,14 @@ class ShoppingCartTest {
     @DisplayName("getTotal: Correctly sums all item subtotals")
     void getTotal_multipleItems_calculatesCorrectly() {
         // Arrange
-        // cart.addItem(new CartItem("P001", "Laptop", 1000.00, 1));   // 1000.00
-        // cart.addItem(new CartItem("P002", "Mouse", 25.00, 2));      // 50.00
+        cart.addItem(new CartItem("P001", "Laptop", 1000.00, 1));   // 1000.00
+        cart.addItem(new CartItem("P002", "Mouse", 25.00, 2));      // 50.00
 
         // Act
-        // double total = cart.getTotal();
+        double total = cart.getTotal();
 
         // Assert
-        // assertEquals(1050.00, total, 0.01, "Total should be $1050.00");
+        assertEquals(1050.00, total, 0.01, "Total should be $1050.00");
     }
 
     /**
@@ -171,7 +171,7 @@ class ShoppingCartTest {
     @Test
     @DisplayName("getTotal: Empty cart returns 0.0")
     void getTotal_emptyCart_returnsZero() {
-        // assertEquals(0.0, cart.getTotal(), 0.01);
+        assertEquals(0.0, cart.getTotal(), 0.01);
     }
 
     // =========================================================================

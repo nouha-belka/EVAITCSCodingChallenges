@@ -49,7 +49,7 @@ public class CartItem {
      */
     public double getSubtotal() {
         // TODO: Return price * quantity
-        return 0.0; // Replace this line
+        return price * quantity; // Replace this line
     }
 
     @Override

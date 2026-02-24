@@ -68,7 +68,8 @@ public class ShoppingCart {
      */
     public double getTotal() {
         // TODO: Sum up all item subtotals
-        return 0.0; // Replace this line
+        
+        return items.stream().mapToDouble(CartItem::getSubtotal).sum(); // Replace this line
     }
 
     /**
