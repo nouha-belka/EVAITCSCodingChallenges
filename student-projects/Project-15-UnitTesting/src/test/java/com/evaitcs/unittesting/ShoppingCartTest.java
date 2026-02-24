@@ -240,7 +240,7 @@ class ShoppingCartTest {
     @DisplayName("findItem: Finding non-existent item returns empty Optional")
     void findItem_nonExistentItem_returnsEmpty() {
         assertTrue(cart.findItem("FAKE").isEmpty(), "Should not find the item");
-    }
+    } 
 
     // =========================================================================
     // TESTS FOR: clear() and isEmpty()
@@ -252,11 +252,11 @@ class ShoppingCartTest {
     @Test
     @DisplayName("clear: After clearing, cart is empty")
     void clear_afterAddingItems_cartIsEmpty() {
-        // cart.addItem(new CartItem("P001", "Laptop", 999.99, 1));
-        // cart.addItem(new CartItem("P002", "Mouse", 25.00, 1));
-        // cart.clear();
-        // assertTrue(cart.isEmpty(), "Cart should be empty after clear");
-        // assertEquals(0, cart.getItemCount(), "Item count should be 0");
+        cart.addItem(new CartItem("P001", "Laptop", 999.99, 1));
+        cart.addItem(new CartItem("P002", "Mouse", 25.00, 1));
+        cart.clear();
+        assertTrue(cart.isEmpty(), "Cart should be empty after clear");
+        assertEquals(0, cart.getItemCount(), "Item count should be 0");
     }
 
     /**
@@ -265,7 +265,7 @@ class ShoppingCartTest {
     @Test
     @DisplayName("isEmpty: New cart is empty")
     void isEmpty_newCart_returnsTrue() {
-        // assertTrue(cart.isEmpty(), "New cart should be empty");
+        assertTrue(cart.isEmpty(), "New cart should be empty");
     }
 
     // =========================================================================
@@ -278,9 +278,9 @@ class ShoppingCartTest {
     @Test
     @DisplayName("CartItem: Negative price throws IllegalArgumentException")
     void cartItem_negativePrice_throwsException() {
-        // assertThrows(IllegalArgumentException.class, () -> {
-        //     new CartItem("P001", "Bad Item", -10.00, 1);
-        // });
+        assertThrows(IllegalArgumentException.class, () -> {
+            new CartItem("P001", "Bad Item", -10.00, 1);
+        });
     }
 
     /**
@@ -289,9 +289,9 @@ class ShoppingCartTest {
     @Test
     @DisplayName("CartItem: Zero quantity throws IllegalArgumentException")
     void cartItem_zeroQuantity_throwsException() {
-        // assertThrows(IllegalArgumentException.class, () -> {
-        //     new CartItem("P001", "Bad Item", 10.00, 0);
-        // });
+        assertThrows(IllegalArgumentException.class, () -> {
+            new CartItem("P001", "Bad Item", 10.00, 0);
+        });
     }
 
     /**
@@ -300,8 +300,8 @@ class ShoppingCartTest {
     @Test
     @DisplayName("applyDiscount: 0% discount returns original total")
     void applyDiscount_zeroPercent_returnsOriginalTotal() {
-        // cart.addItem(new CartItem("P001", "Item", 100.00, 1));
-        // assertEquals(100.00, cart.applyDiscount(0), 0.01);
+        cart.addItem(new CartItem("P001", "Item", 100.00, 1));
+        assertEquals(100.00, cart.applyDiscount(0), 0.01);
     }
 
     /**
@@ -310,8 +310,8 @@ class ShoppingCartTest {
     @Test
     @DisplayName("applyDiscount: 100% discount returns $0.00")
     void applyDiscount_hundredPercent_returnsZero() {
-        // cart.addItem(new CartItem("P001", "Item", 100.00, 1));
-        // assertEquals(0.00, cart.applyDiscount(100), 0.01);
+        cart.addItem(new CartItem("P001", "Item", 100.00, 1));
+        assertEquals(0.00, cart.applyDiscount(100), 0.01);
     }
 }
 

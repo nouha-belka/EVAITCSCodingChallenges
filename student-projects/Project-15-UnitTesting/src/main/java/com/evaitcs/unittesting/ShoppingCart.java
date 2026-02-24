@@ -109,6 +109,7 @@ public class ShoppingCart {
      */
     public void clear() {
         // TODO: Clear the items list
+        items.clear();
     }
 
     /**
