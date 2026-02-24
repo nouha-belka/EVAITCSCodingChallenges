@@ -185,13 +185,13 @@ class ShoppingCartTest {
     @DisplayName("applyDiscount: 10% discount on $100 total returns $90")
     void applyDiscount_validPercent_calculatesCorrectly() {
         // Arrange
-        // cart.addItem(new CartItem("P001", "Item", 100.00, 1));
+        cart.addItem(new CartItem("P001", "Item", 100.00, 1));
 
         // Act
-        // double discounted = cart.applyDiscount(10);
+        double discounted = cart.applyDiscount(10);
 
         // Assert
-        // assertEquals(90.00, discounted, 0.01, "10% off $100 should be $90");
+        assertEquals(90.00, discounted, 0.01, "10% off $100 should be $90");
     }
 
     /**
@@ -200,6 +200,9 @@ class ShoppingCartTest {
     @Test
     @DisplayName("applyDiscount: Negative discount throws exception")
     void applyDiscount_negativePercent_throwsException() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            cart.applyDiscount(-10);
+        });
         // assertThrows(IllegalArgumentException.class, () -> {
         //     cart.applyDiscount(-10);
         // });
@@ -211,9 +214,9 @@ class ShoppingCartTest {
     @Test
     @DisplayName("applyDiscount: Discount > 100% throws exception")
     void applyDiscount_over100Percent_throwsException() {
-        // assertThrows(IllegalArgumentException.class, () -> {
-        //     cart.applyDiscount(150);
-        // });
+        assertThrows(IllegalArgumentException.class, () -> {
+            cart.applyDiscount(150);
+        });
     }
 
     // =========================================================================

@@ -130,7 +130,11 @@ public class ShoppingCart {
      */
     public double applyDiscount(double discountPercent) {
         // TODO: Validate discount range, calculate discounted total
-        return 0.0; // Replace this line
+        if(discountPercent < 0 || discountPercent > 100){
+            throw new IllegalArgumentException("Percentage can't be negative");
+        }
+
+        return this.getTotal() - this.getTotal() * (discountPercent / 100); // Replace this line
     }
 
     /**
