@@ -1,5 +1,8 @@
 package com.evaitcs.unittesting;
 
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * ============================================================================
  * CLASS: DiscountCalculator
@@ -22,7 +25,19 @@ public class DiscountCalculator {
      */
     public double getDiscountPercent(double total) {
         // TODO: Implement the discount rules
-        return 0.0; // Replace this line
+        if(total <0 ){
+            throw new IllegalArgumentException("totalt can't be negative");
+        }
+        if(total >= 500 ){
+            return 20.0;
+
+        }else if (total >= 200 ) {
+            return 10.0;
+        }else if (total >= 100 ) {
+            return 5.0;
+        }else{
+            return 0.0;
+        }
     }
 
     /**
@@ -33,7 +48,7 @@ public class DiscountCalculator {
      */
     public double calculateFinalPrice(double total) {
         // TODO: Get discount percent, apply it, return final price
-        return 0.0; // Replace this line
+        return total - total * (getDiscountPercent(total) / 100); // Replace this line
     }
 
     /**
@@ -45,7 +60,8 @@ public class DiscountCalculator {
      */
     public boolean isValidPromoCode(String code) {
         // TODO: Check against known promo codes
-        return false; // Replace this line
+        List<String> validCodes =  Arrays.asList("SAVE10", "WELCOME20", "VIP30");
+        return validCodes.contains(code); // Replace this line
     }
 
     /**
@@ -60,7 +76,16 @@ public class DiscountCalculator {
      */
     public double getPromoDiscount(String code) {
         // TODO: Return the discount for the promo code
-        return 0.0; // Replace this line
+        if(code.equals("SAVE10" )){
+            return 10.0;
+        }else if(code.equals("WELCOME20" )){
+            return 20.0;
+        }else if(code.equals("VIP30" )){
+            return 30.0;
+        }else{
+            throw new IllegalArgumentException("invalid promo code");
+        }
+
     }
 }
 

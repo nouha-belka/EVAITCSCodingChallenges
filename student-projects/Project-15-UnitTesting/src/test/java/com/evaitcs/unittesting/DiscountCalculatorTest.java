@@ -1,10 +1,16 @@
 package com.evaitcs.unittesting;
 
-import org.junit.jupiter.api.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Nested;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
-import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * ============================================================================
@@ -63,8 +69,8 @@ class DiscountCalculatorTest {
     })
     void getDiscountPercent_variousTotals_returnsCorrectDiscount(double total, double expectedDiscount) {
         // TODO: Uncomment and implement
-        // assertEquals(expectedDiscount, calculator.getDiscountPercent(total), 0.01,
-        //     "Total $" + total + " should give " + expectedDiscount + "% discount");
+        assertEquals(expectedDiscount, calculator.getDiscountPercent(total), 0.01,
+            "Total $" + total + " should give " + expectedDiscount + "% discount");
     }
 
     /**
@@ -73,9 +79,9 @@ class DiscountCalculatorTest {
     @Test
     @DisplayName("getDiscountPercent: Negative total throws exception")
     void getDiscountPercent_negativeTotal_throwsException() {
-        // assertThrows(IllegalArgumentException.class, () -> {
-        //     calculator.getDiscountPercent(-50.00);
-        // });
+        assertThrows(IllegalArgumentException.class, () -> {
+            calculator.getDiscountPercent(-50.00);
+        });
     }
 
     /**
@@ -93,7 +99,7 @@ class DiscountCalculatorTest {
     })
     void getDiscountPercent_boundaryValues_returnsCorrectDiscount(double total, double expected) {
         // TODO: Uncomment
-        // assertEquals(expected, calculator.getDiscountPercent(total), 0.01);
+        assertEquals(expected, calculator.getDiscountPercent(total), 0.01);
     }
 
     // =========================================================================
@@ -112,8 +118,8 @@ class DiscountCalculatorTest {
     })
     void calculateFinalPrice_variousTotals_calculatesCorrectly(double total, double expectedFinal) {
         // TODO: Uncomment
-        // assertEquals(expectedFinal, calculator.calculateFinalPrice(total), 0.01,
-        //     "Total $" + total + " should have final price $" + expectedFinal);
+        assertEquals(expectedFinal, calculator.calculateFinalPrice(total), 0.01,
+            "Total $" + total + " should have final price $" + expectedFinal);
     }
 
     // =========================================================================
@@ -127,8 +133,8 @@ class DiscountCalculatorTest {
     @ValueSource(strings = {"SAVE10", "WELCOME20", "VIP30"})
     void isValidPromoCode_validCodes_returnsTrue(String code) {
         // TODO: Uncomment
-        // assertTrue(calculator.isValidPromoCode(code),
-        //     "Code '" + code + "' should be valid");
+        assertTrue(calculator.isValidPromoCode(code),
+            "Code '" + code + "' should be valid");
     }
 
     /**
@@ -138,8 +144,8 @@ class DiscountCalculatorTest {
     @ValueSource(strings = {"INVALID", "SAVE50", "", "save10"})
     void isValidPromoCode_invalidCodes_returnsFalse(String code) {
         // TODO: Uncomment
-        // assertFalse(calculator.isValidPromoCode(code),
-        //     "Code '" + code + "' should be invalid");
+        assertFalse(calculator.isValidPromoCode(code),
+            "Code '" + code + "' should be invalid");
     }
 
     /**
@@ -149,7 +155,7 @@ class DiscountCalculatorTest {
     @DisplayName("isValidPromoCode: null code returns false")
     void isValidPromoCode_nullCode_returnsFalse() {
         // TODO: Uncomment
-        // assertFalse(calculator.isValidPromoCode(null));
+        assertFalse(calculator.isValidPromoCode(null));
     }
 
     // =========================================================================
@@ -167,7 +173,7 @@ class DiscountCalculatorTest {
     })
     void getPromoDiscount_validCodes_returnsCorrectDiscount(String code, double expectedDiscount) {
         // TODO: Uncomment
-        // assertEquals(expectedDiscount, calculator.getPromoDiscount(code), 0.01);
+        assertEquals(expectedDiscount, calculator.getPromoDiscount(code), 0.01);
     }
 
     /**
@@ -177,9 +183,9 @@ class DiscountCalculatorTest {
     @DisplayName("getPromoDiscount: Invalid code throws exception")
     void getPromoDiscount_invalidCode_throwsException() {
         // TODO: Uncomment
-        // assertThrows(IllegalArgumentException.class, () -> {
-        //     calculator.getPromoDiscount("FAKE_CODE");
-        // });
+        assertThrows(IllegalArgumentException.class, () -> {
+            calculator.getPromoDiscount("FAKE_CODE");
+        });
     }
 
     // =========================================================================
@@ -198,14 +204,14 @@ class DiscountCalculatorTest {
         @DisplayName("Zero total returns zero final price")
         void calculateFinalPrice_zeroTotal_returnsZero() {
             // TODO: Uncomment
-            // assertEquals(0.0, calculator.calculateFinalPrice(0.0), 0.01);
+            assertEquals(0.0, calculator.calculateFinalPrice(0.0), 0.01);
         }
 
         @Test
         @DisplayName("Very large total still applies 20% discount")
         void getDiscountPercent_veryLargeTotal_returns20() {
             // TODO: Uncomment
-            // assertEquals(20.0, calculator.getDiscountPercent(1000000.00), 0.01);
+            assertEquals(20.0, calculator.getDiscountPercent(1000000.00), 0.01);
         }
     }
 }
