@@ -101,7 +101,7 @@ public class ShoppingCart {
      */
     public Optional<CartItem> findItem(String productId) {
         // TODO: Search and return the item wrapped in Optional
-        return Optional.empty(); // Replace this line
+        return items.stream().filter(x -> x.getProductId().equals(productId)).findFirst(); // Replace this line
     }
 
     /**

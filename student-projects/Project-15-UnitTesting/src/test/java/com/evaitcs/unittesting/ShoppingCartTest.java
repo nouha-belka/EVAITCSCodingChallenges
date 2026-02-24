@@ -229,8 +229,8 @@ class ShoppingCartTest {
     @Test
     @DisplayName("findItem: Finding existing item returns present Optional")
     void findItem_existingItem_returnsPresent() {
-        // cart.addItem(new CartItem("P001", "Laptop", 999.99, 1));
-        // assertTrue(cart.findItem("P001").isPresent(), "Should find the item");
+        cart.addItem(new CartItem("P001", "Laptop", 999.99, 1));
+        assertTrue(cart.findItem("P001").isPresent(), "Should find the item");
     }
 
     /**
@@ -239,7 +239,7 @@ class ShoppingCartTest {
     @Test
     @DisplayName("findItem: Finding non-existent item returns empty Optional")
     void findItem_nonExistentItem_returnsEmpty() {
-        // assertTrue(cart.findItem("FAKE").isEmpty(), "Should not find the item");
+        assertTrue(cart.findItem("FAKE").isEmpty(), "Should not find the item");
     }
 
     // =========================================================================
