@@ -1,7 +1,13 @@
 package com.evaitcs.exceptionfileio;
 
-import java.io.*;
-import java.nio.file.*;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,6 +50,11 @@ public class ContactFileManager {
     public ContactFileManager(String filePath) {
         this.filePath = filePath;
         // TODO: Create parent directories if they don't exist
+        File file = new File(this.filePath);
+        File parentDir = file.getParentFile();
+        if(parentDir != null  && !parentDir.exists()){
+            parentDir.mkdirs();
+        }
         // Hint: new File(filePath).getParentFile().mkdirs();
         // But handle the case where there's no parent directory
     }
@@ -67,15 +78,16 @@ public class ContactFileManager {
      */
     public void writeContacts(List<Contact> contacts) throws IOException {
         // TODO: Implement using try-with-resources
-        // try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
-        //     writer.write("id,firstName,lastName,email,phoneNumber");
-        //     writer.newLine();
-        //     for (Contact contact : contacts) {
-        //         writer.write(contact.toCsvString());
-        //         writer.newLine();
-        //     }
-        //     System.out.println("Wrote " + contacts.size() + " contacts to " + filePath);
-        // }
+        try(BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
+            writer.write("\"id,firstName,lastName,email,phoneNumber\"");
+            writer.newLine();
+            for (Contact contact : contacts) {
+                writer.write(contact.toCsvString());
+                writer.newLine();
+            }            
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         // The try-with-resources automatically closes the writer!
     }
 
@@ -88,10 +100,22 @@ public class ContactFileManager {
      */
     public void appendContact(Contact contact) throws IOException {
         // TODO: Check if file exists; if not, write header first
+        File file = new File(filePath);
+        boolean fileExists = file.exists();
+
         // Use: new FileWriter(filePath, true) for append mode
-        // try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true))) {
-        //     ...
-        // }
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true))) {
+            if(fileExists){
+                writer.write("id,firstName,lastName,email,phoneNumber");
+                writer.newLine();
+            }
+
+            writer.write(contact.toCsvString());
+            writer.newLine();
+
+        }catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     // =========================================================================
@@ -116,20 +140,22 @@ public class ContactFileManager {
         List<Contact> contacts = new ArrayList<>();
 
         // TODO: Implement reading with try-with-resources
-        // try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
-        //     String header = reader.readLine(); // Skip header
-        //     String line;
-        //     int lineNumber = 1;
-        //     while ((line = reader.readLine()) != null) {
-        //         lineNumber++;
-        //         try {
-        //             contacts.add(Contact.fromCsvString(line));
-        //         } catch (InvalidContactException e) {
-        //             // Skip bad lines but log the error!
-        //             System.err.println("Skipping invalid data at line " + lineNumber + ": " + e.getMessage());
-        //         }
-        //     }
-        // }
+        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
+            String header = reader.readLine(); // Skip header
+            String line;
+            int lineNumber = 1;
+            while ((line = reader.readLine()) != null) {
+                lineNumber++;
+                try {
+                    contacts.add(Contact.fromCsvString(line));
+                } catch (InvalidContactException e) {
+                    // Skip bad lines but log the error!
+                    System.err.println("Skipping invalid data at line " + lineNumber + ": " + e.getMessage());
+                }
+            }
+        }catch (IOException e) {
+            e.printStackTrace();
+        }
 
         return contacts;
     }
@@ -189,7 +215,7 @@ public class ContactFileManager {
      */
     public boolean fileExists() {
         // TODO: Use Files.exists(Path.of(filePath))
-        return false; // Replace this line
+        return Files.exists(Path.of(filePath)); // Replace this line
     }
 
     /**

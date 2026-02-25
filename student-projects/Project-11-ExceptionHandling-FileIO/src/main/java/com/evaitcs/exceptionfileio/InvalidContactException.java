@@ -27,13 +27,26 @@ package com.evaitcs.exceptionfileio;
 public class InvalidContactException extends RuntimeException {
 
     // TODO: Add a private final String field called 'fieldName'
+    private final String fieldName;
 
     // TODO: Constructor(String fieldName, String message)
+    public InvalidContactException(String fieldName, String message ) {
+        super(message);
+        this.fieldName = fieldName;
+    }
     //   Call super(message) and set this.fieldName
 
     // TODO: Constructor(String fieldName, String message, Throwable cause)
     //   Call super(message, cause)
+        public InvalidContactException(String fieldName, String message,  Throwable cause ) {
+        super(message, cause);
+        this.fieldName = fieldName;
+    }
 
     // TODO: Getter for fieldName
+
+    public String getFieldName() {
+        return fieldName;
+    }
 }
 
