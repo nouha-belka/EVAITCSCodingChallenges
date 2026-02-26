@@ -41,6 +41,7 @@ public class SharedCounter {
      */
     public void unsafeIncrement() {
         // TODO: unsafeCount++
+        unsafeCount++;
     }
 
     public int getUnsafeCount() {
@@ -63,6 +64,7 @@ public class SharedCounter {
      */
     public synchronized void safeIncrement() {
         // TODO: safeCount++
+        safeCount++;
     }
 
     public int getSafeCount() {
@@ -87,33 +89,33 @@ public class SharedCounter {
         int incrementsPerThread = 1000;
 
         // TODO 4: Create threads for UNSAFE counting
-        // Thread[] unsafeThreads = new Thread[numThreads];
-        // for (int i = 0; i < numThreads; i++) {
-        //     unsafeThreads[i] = new Thread(() -> {
-        //         for (int j = 0; j < incrementsPerThread; j++) {
-        //             counter.unsafeIncrement();
-        //         }
-        //     });
-        //     unsafeThreads[i].start();
-        // }
-        // for (Thread t : unsafeThreads) t.join();
+        Thread[] unsafeThreads = new Thread[numThreads];
+        for (int i = 0; i < numThreads; i++) {
+            unsafeThreads[i] = new Thread(() -> {
+                for (int j = 0; j < incrementsPerThread; j++) {
+                    counter.unsafeIncrement();
+                }
+            });
+            unsafeThreads[i].start();
+        }
+        for (Thread t : unsafeThreads) t.join();
         //
-        // System.out.println("Expected: " + (numThreads * incrementsPerThread));
-        // System.out.println("Unsafe count: " + counter.getUnsafeCount() + " (likely WRONG!)");
+        System.out.println("Expected: " + (numThreads * incrementsPerThread));
+        System.out.println("Unsafe count: " + counter.getUnsafeCount() + " (likely WRONG!)");
 
         // TODO 5: Create threads for SAFE counting
-        // Thread[] safeThreads = new Thread[numThreads];
-        // for (int i = 0; i < numThreads; i++) {
-        //     safeThreads[i] = new Thread(() -> {
-        //         for (int j = 0; j < incrementsPerThread; j++) {
-        //             counter.safeIncrement();
-        //         }
-        //     });
-        //     safeThreads[i].start();
-        // }
-        // for (Thread t : safeThreads) t.join();
-        //
-        // System.out.println("Safe count: " + counter.getSafeCount() + " (always CORRECT!)");
+        Thread[] safeThreads = new Thread[numThreads];
+        for (int i = 0; i < numThreads; i++) {
+            safeThreads[i] = new Thread(() -> {
+                for (int j = 0; j < incrementsPerThread; j++) {
+                    counter.safeIncrement();
+                }
+            });
+            safeThreads[i].start();
+        }
+        for (Thread t : safeThreads) t.join();
+        
+        System.out.println("Safe count: " + counter.getSafeCount() + " (always CORRECT!)");
     }
 }
 

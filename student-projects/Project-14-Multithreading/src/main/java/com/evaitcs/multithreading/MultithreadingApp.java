@@ -19,7 +19,7 @@ public class MultithreadingApp {
         System.out.println("\n" + "=".repeat(50) + "\n");
 
         // TODO 2: Run the SharedCounter demo (synchronization)
-        // SharedCounter.demo();
+        SharedCounter.demo();
 
         System.out.println("\n" + "=".repeat(50) + "\n");
 
