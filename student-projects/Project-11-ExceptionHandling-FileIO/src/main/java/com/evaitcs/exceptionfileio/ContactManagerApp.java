@@ -100,50 +100,50 @@ public class ContactManagerApp {
         System.out.println("\n--- Testing Contact Search (Checked Exception) ---\n");
 
         // TODO 8: Search for a contact that EXISTS
-        // try {
-        //     Contact found = fileManager.findContactById("2");
-        //     System.out.println("Found: " + found);
-        // } catch (ContactNotFoundException e) {
-        //     System.out.println("Not found: " + e.getMessage());
-        // } catch (IOException e) {
-        //     System.err.println("File error: " + e.getMessage());
-        // }
+        try {
+            Contact found = fileManager.findContactById("2");
+            System.out.println("Found: " + found);
+        } catch (ContactNotFoundException e) {
+            System.out.println("Not found: " + e.getMessage());
+        } catch (IOException e) {
+            System.err.println("File error: " + e.getMessage());
+        }
 
         // TODO 9: Search for a contact that DOESN'T EXIST
-        // try {
-        //     Contact notFound = fileManager.findContactById("999");
-        //     System.out.println("Found: " + notFound);
-        // } catch (ContactNotFoundException e) {
-        //     // This is EXPECTED — we handle it gracefully
-        //     System.out.println("Expected: " + e.getMessage());
-        // } catch (IOException e) {
-        //     System.err.println("File error: " + e.getMessage());
-        // }
+        try {
+            Contact notFound = fileManager.findContactById("999");
+            System.out.println("Found: " + notFound);
+        } catch (ContactNotFoundException e) {
+            // This is EXPECTED — we handle it gracefully
+            System.out.println( e.getMessage());
+        } catch (IOException e) {
+            System.err.println("File error: " + e.getMessage());
+        }
 
         System.out.println("\n--- Testing Backup ---\n");
 
         // TODO 10: Create a backup of the contacts file
-        // try {
-        //     fileManager.createBackup();
-        //     System.out.println("Backup created successfully!");
-        // } catch (IOException e) {
-        //     System.err.println("Backup failed: " + e.getMessage());
-        // }
+        try {
+            fileManager.createBackup();
+            System.out.println("Backup created successfully!");
+        } catch (IOException e) {
+            System.err.println("Backup failed: " + e.getMessage());
+        }
 
         System.out.println("\n--- Testing Delete ---\n");
 
         // TODO 11: Delete a contact and verify
-        // try {
-        //     fileManager.deleteContact("2");
-        //     System.out.println("Contact deleted.");
-        //
-        //     List<Contact> remaining = fileManager.readContacts();
-        //     System.out.println("Remaining contacts: " + remaining.size());
-        // } catch (ContactNotFoundException e) {
-        //     System.out.println("Cannot delete: " + e.getMessage());
-        // } catch (IOException e) {
-        //     System.err.println("File error: " + e.getMessage());
-        // }
+        try {
+            fileManager.deleteContact("2");
+            System.out.println("Contact deleted.");
+        
+            List<Contact> remaining = fileManager.readContacts();
+            System.out.println("Remaining contacts: " + remaining.size());
+        } catch (ContactNotFoundException e) {
+            System.out.println("Cannot delete: " + e.getMessage());
+        } catch (IOException e) {
+            System.err.println("File error: " + e.getMessage());
+        }
 
         System.out.println("\n============================================");
         System.out.println("   CONTACT MANAGER DEMO COMPLETE");

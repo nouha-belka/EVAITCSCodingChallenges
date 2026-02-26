@@ -8,6 +8,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -153,8 +154,6 @@ public class ContactFileManager {
                     System.err.println("Skipping invalid data at line " + lineNumber + ": " + e.getMessage());
                 }
             }
-        }catch (IOException e) {
-            e.printStackTrace();
         }
 
         return contacts;
@@ -172,8 +171,33 @@ public class ContactFileManager {
     public Contact findContactById(String contactId) throws ContactNotFoundException, IOException {
         // TODO: Read all contacts, search for matching ID
         // If not found: throw new ContactNotFoundException("Contact with ID '" + contactId + "' not found");
+         try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
+            reader.readLine(); // skip header
+            String line;
+            int lineNumber = 1;
 
-        return null; // Replace this line
+            while ((line = reader.readLine()) != null) {
+                lineNumber++;
+
+                try {
+                    Contact contact = Contact.fromCsvString(line);
+
+                    if (contact.getId().equals(contactId)) {
+                        return contact;  // return immediately when found
+                    }
+
+                } catch (InvalidContactException e) {
+                    // Skip bad lines but log the error
+                    System.err.println("Skipping invalid data at line " 
+                            + lineNumber + ": " + e.getMessage());
+                }
+            }
+
+            // If loop ends → not found
+            throw new ContactNotFoundException(
+                    "Contact with ID '" + contactId + "' not found");
+
+        }
     }
 
     /**
@@ -188,6 +212,41 @@ public class ContactFileManager {
         // TODO: Read contacts, find and remove the matching one
         // If not found, throw ContactNotFoundException
         // If found, write the updated list back to the file
+        List<String> updatedLines = new ArrayList<>();
+        boolean found = false;
+
+        try(BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
+           updatedLines.add( reader.readLine()); // add header
+
+           String line;
+           int lineNumber = 1;
+           while ((line = reader.readLine()) != null){
+            lineNumber++;
+            try {
+                Contact contact = Contact.fromCsvString(line);
+                if(contact.getId().equals(contactId)){
+                    found = true;
+                }else{
+                    updatedLines.add(line);
+                }
+            } catch (InvalidContactException e) {
+                System.err.println("Skipping invalid data at line " 
+                            + lineNumber + ": " + e.getMessage());
+            }
+           }
+        } 
+        if(!found){
+         throw new ContactNotFoundException(
+             "Contact with ID '" + contactId + "' not found");
+        }
+        // Rewrite file with updated content
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
+            for (String l : updatedLines) {
+                writer.write(l);
+                writer.newLine();
+            }
+        }
+
     }
 
     // =========================================================================
@@ -226,9 +285,9 @@ public class ContactFileManager {
      */
     public void createBackup() throws IOException {
         // TODO: Use Files.copy() from Java NIO
-        // Path source = Path.of(filePath);
-        // Path backup = Path.of(filePath + ".bak");
-        // Files.copy(source, backup, StandardCopyOption.REPLACE_EXISTING);
+        Path source = Path.of(filePath);
+        Path backup = Path.of(filePath + ".bak");
+        Files.copy(source, backup, StandardCopyOption.REPLACE_EXISTING);
     }
 }
 

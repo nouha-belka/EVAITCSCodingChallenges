@@ -39,5 +39,11 @@ package com.evaitcs.exceptionfileio;
 
 public class ContactNotFoundException extends Exception {
     // YOUR CONSTRUCTORS HERE
+    public ContactNotFoundException(String message){
+        super(message);
+    }
+    public ContactNotFoundException(String message, Throwable cause){
+        super(message, cause);
+    }
 }
 
