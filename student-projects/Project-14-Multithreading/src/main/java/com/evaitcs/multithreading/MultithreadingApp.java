@@ -14,17 +14,17 @@ public class MultithreadingApp {
         System.out.println("============================================\n");
 
         // TODO 1: Run the SimpleThreadDemo
-        SimpleThreadDemo.demo();
+        // SimpleThreadDemo.demo();
 
         System.out.println("\n" + "=".repeat(50) + "\n");
 
         // TODO 2: Run the SharedCounter demo (synchronization)
-        SharedCounter.demo();
+        // SharedCounter.demo();
 
         System.out.println("\n" + "=".repeat(50) + "\n");
 
         // TODO 3: Run the TaskProcessor demo (ExecutorService)
-        // TaskProcessor.demo();
+        TaskProcessor.demo();
 
         System.out.println("\n============================================");
         System.out.println("   MULTITHREADING DEMO COMPLETE");

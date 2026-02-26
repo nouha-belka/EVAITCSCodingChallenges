@@ -2,7 +2,12 @@ package com.evaitcs.multithreading;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.*;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 
 /**
  * ============================================================================
@@ -33,7 +38,7 @@ import java.util.concurrent.*;
 public class TaskProcessor {
 
     // TODO 1: Declare a private ExecutorService field
-    // private final ExecutorService executor;
+    private final ExecutorService executor;
 
 
     /**
@@ -41,10 +46,10 @@ public class TaskProcessor {
      *
      * @param poolSize the number of threads in the pool
      */
-    // public TaskProcessor(int poolSize) {
-    //     this.executor = Executors.newFixedThreadPool(poolSize);
-    //     System.out.println("TaskProcessor initialized with " + poolSize + " threads.");
-    // }
+    public TaskProcessor(int poolSize) {
+        this.executor = Executors.newFixedThreadPool(poolSize);
+        System.out.println("TaskProcessor initialized with " + poolSize + " threads.");
+    }
 
 
     /**
@@ -59,14 +64,18 @@ public class TaskProcessor {
      */
     public Future<String> fetchData(String url) {
         // TODO: Submit a Callable to the executor
-        // return executor.submit(() -> {
-        //     String threadName = Thread.currentThread().getName();
-        //     System.out.println("Fetching: " + url + " (Thread: " + threadName + ")");
-        //     Thread.sleep((long) (Math.random() * 2000 + 1000));
-        //     return "Data from " + url;
-        // });
+        return executor.submit(() -> {
+            String threadName = Thread.currentThread().getName();
+            System.out.println("Fetching: " + url + " (Thread: " + threadName + ")");
+            // Simulate a very long task to force shutdown timeout
+            if (url.contains("orders") || url.contains("reviews") ) {
+                Thread.sleep(15000); // 15 seconds
+            } else {
+                Thread.sleep((long) (Math.random() * 2000 + 1000));
+            }
+            return "Data from " + url;
+        });
 
-        return null; // Replace this line
     }
 
     /**
@@ -75,25 +84,25 @@ public class TaskProcessor {
      * @param urls list of URLs to fetch
      * @return list of results
      */
-    public List<String> fetchAllData(List<String> urls) {
+    public List<String> fetchAllData(List<String> urls)  {
         List<String> results = new ArrayList<>();
 
         // TODO: Submit all tasks and collect Futures
-        // List<Future<String>> futures = new ArrayList<>();
-        // for (String url : urls) {
-        //     futures.add(fetchData(url));
-        // }
+        List<Future<String>> futures = new ArrayList<>();
+        for (String url : urls) {
+            futures.add(fetchData(url));
+        }
 
         // TODO: Collect results from all Futures
-        // for (Future<String> future : futures) {
-        //     try {
-        //         results.add(future.get(5, TimeUnit.SECONDS));
-        //     } catch (TimeoutException e) {
-        //         results.add("TIMEOUT");
-        //     } catch (InterruptedException | ExecutionException e) {
-        //         results.add("ERROR: " + e.getMessage());
-        //     }
-        // }
+        for (Future<String> future : futures) {
+            try {
+                results.add(future.get(5, TimeUnit.SECONDS));
+            } catch (TimeoutException e) {
+                results.add("TIMEOUT");
+            } catch (InterruptedException | ExecutionException e) {
+                results.add("ERROR: " + e.getMessage());
+            }
+        }
 
         return results;
     }
@@ -107,15 +116,15 @@ public class TaskProcessor {
      */
     public void shutdown() {
         // TODO: Implement graceful shutdown
-        // executor.shutdown();
-        // try {
-        //     if (!executor.awaitTermination(10, TimeUnit.SECONDS)) {
-        //         executor.shutdownNow();
-        //     }
-        // } catch (InterruptedException e) {
-        //     executor.shutdownNow();
-        // }
-        // System.out.println("TaskProcessor shut down.");
+        executor.shutdown();
+        try {
+            if (!executor.awaitTermination(5, TimeUnit.SECONDS)) {
+                executor.shutdownNow();
+            }
+        } catch (InterruptedException e) {
+            executor.shutdownNow();
+        }
+        System.out.println("TaskProcessor shut down.");
     }
 
     /**
@@ -125,31 +134,31 @@ public class TaskProcessor {
         System.out.println("=== ExecutorService Demo ===\n");
 
         // TODO: Create a TaskProcessor with 3 threads
-        // TaskProcessor processor = new TaskProcessor(3);
+        TaskProcessor processor = new TaskProcessor(3);
 
         // TODO: Fetch multiple URLs concurrently
-        // List<String> urls = List.of(
-        //     "https://api.example.com/users",
-        //     "https://api.example.com/products",
-        //     "https://api.example.com/orders",
-        //     "https://api.example.com/reviews",
-        //     "https://api.example.com/inventory"
-        // );
+        List<String> urls = List.of(
+            "https://api.example.com/users",
+            "https://api.example.com/products",
+            "https://api.example.com/orders",
+            "https://api.example.com/reviews",
+            "https://api.example.com/inventory"
+        );
+        
+        System.out.println("Fetching " + urls.size() + " URLs with 3 threads...\n");
+        long start = System.currentTimeMillis();
         //
-        // System.out.println("Fetching " + urls.size() + " URLs with 3 threads...\n");
-        // long start = System.currentTimeMillis();
+        List<String> results = processor.fetchAllData(urls);
         //
-        // List<String> results = processor.fetchAllData(urls);
+        long elapsed = System.currentTimeMillis() - start;
+        System.out.println("\nResults:");
+        for (String result : results) {
+            System.out.println("  " + result);
+        }
+        System.out.println("Completed in " + elapsed + "ms");
+        System.out.println("(Sequential would take ~" + (urls.size() * 2000) + "ms)");
         //
-        // long elapsed = System.currentTimeMillis() - start;
-        // System.out.println("\nResults:");
-        // for (String result : results) {
-        //     System.out.println("  " + result);
-        // }
-        // System.out.println("Completed in " + elapsed + "ms");
-        // System.out.println("(Sequential would take ~" + (urls.size() * 2000) + "ms)");
-        //
-        // processor.shutdown();
+        processor.shutdown();
     }
 }
 
