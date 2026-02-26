@@ -20,7 +20,7 @@ package com.evaitcs.multithreading;
  * "I prefer implementing Runnable over extending Thread because Java
  *  supports single inheritance only. With Runnable, the class can still
  *  extend another class."
- * ============================================================================
+ * ============================================================================[]
  */
 public class SimpleThreadDemo {
 
@@ -40,26 +40,28 @@ public class SimpleThreadDemo {
      * Add a constructor that takes a String fileName and stores it.
      * Set a meaningful thread name: setName("Download-" + fileName);
      */
-    // static class DownloadThread extends Thread {
-    //     private final String fileName;
-    //
-    //     public DownloadThread(String fileName) {
-    //         this.fileName = fileName;
-    //         setName("Download-" + fileName);
-    //     }
-    //
-    //     @Override
-    //     public void run() {
-    //         try {
-    //             System.out.println("Downloading: " + fileName + " (Thread: " + getName() + ")");
-    //             Thread.sleep(2000);
-    //             System.out.println("Download complete: " + fileName);
-    //         } catch (InterruptedException e) {
-    //             Thread.currentThread().interrupt();
-    //             System.err.println("Download interrupted: " + fileName);
-    //         }
-    //     }
-    // }
+    static class DownloadThread extends Thread {
+        private final String fileName;
+
+        public DownloadThread(String fileName) {
+            this.fileName = fileName;
+            setName("Download-" + fileName);
+        }
+        @Override
+        public void run(){
+            System.out.println("Downloading: " + fileName + " (Thread: " + getName() + ")");
+            try {
+                Thread.sleep(2000);
+            } catch (Exception e) {
+                // TODO Auto-generated catch block
+                Thread.currentThread().interrupt();
+                throw new RuntimeException("Thread : " + getName() + " was interrupted", e);
+            }
+            System.out.println("Download complete:" + fileName);
+
+        }
+    }
+
 
 
     // =========================================================================
@@ -75,18 +77,26 @@ public class SimpleThreadDemo {
      * - Simulate work with Thread.sleep(1500)
      * - Print: "Task complete: [taskName]"
      */
-    // static class ProcessingTask implements Runnable {
-    //     private final String taskName;
-    //
-    //     public ProcessingTask(String taskName) {
-    //         this.taskName = taskName;
-    //     }
-    //
-    //     @Override
-    //     public void run() {
-    //         // TODO: Implement
-    //     }
-    // }
+    static class ProcessingTask implements Runnable {
+        private final String taskName;
+    
+        public ProcessingTask(String taskName) {
+            this.taskName = taskName;
+        }
+    
+        @Override
+        public void run() {
+            System.out.println("Processing task: " + taskName + " (Thread: " + Thread.currentThread().getName() + ")");
+            try {
+                Thread.sleep(2000);
+            } catch (Exception e) {
+                // TODO Auto-generated catch block
+                Thread.currentThread().interrupt();
+                throw new RuntimeException("Thread : " + Thread.currentThread().getName() + " was interrupted", e);
+            }
+            System.out.println("\"Task complete:  " + taskName);
+        }
+    }
 
 
     // =========================================================================
@@ -100,42 +110,42 @@ public class SimpleThreadDemo {
         System.out.println("=== Thread Creation Demo ===\n");
 
         // TODO 4: Create and start threads using Approach 1 (extend Thread)
-        // DownloadThread download1 = new DownloadThread("report.pdf");
-        // DownloadThread download2 = new DownloadThread("image.png");
-        // download1.start();  // NOT .run()!
-        // download2.start();
+        DownloadThread extendedThread1 = new DownloadThread("output1.txt");
+        DownloadThread extendedThread2 = new DownloadThread("output2.txt");
+        extendedThread1.start();  
+        extendedThread2.start();
 
         // TODO 5: Create and start threads using Approach 2 (implement Runnable)
-        // Thread task1 = new Thread(new ProcessingTask("Data Analysis"));
-        // Thread task2 = new Thread(new ProcessingTask("Report Generation"));
-        // task1.start();
-        // task2.start();
+        Thread runnablThread1 = new Thread(new ProcessingTask("Task 1"));
+        Thread runnablThread2 = new Thread(new ProcessingTask("Task 2"));
+        runnablThread1.start();
+        runnablThread2.start();
 
         // TODO 6: Create a thread using Approach 3 (Lambda)
-        // Thread lambdaThread = new Thread(() -> {
-        //     System.out.println("Lambda thread running! (Thread: "
-        //         + Thread.currentThread().getName() + ")");
-        //     try {
-        //         Thread.sleep(1000);
-        //     } catch (InterruptedException e) {
-        //         Thread.currentThread().interrupt();
-        //     }
-        //     System.out.println("Lambda thread complete!");
-        // }, "Lambda-Worker");
-        // lambdaThread.start();
+        Thread lambdaThread = new Thread(() -> {
+            System.out.println("This Lambda  (Thread: "
+                + Thread.currentThread().getName() + ")");
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+            }
+            System.out.println("Lambda thread complete");
+        }, "Lambda-Worker");
+        lambdaThread.start();
 
         // TODO 7: Wait for all threads to finish using .join()
-        // try {
-        //     download1.join();
-        //     download2.join();
-        //     task1.join();
-        //     task2.join();
-        //     lambdaThread.join();
-        // } catch (InterruptedException e) {
-        //     Thread.currentThread().interrupt();
-        // }
+        try {
+            extendedThread1.join();
+            extendedThread2.join();
+            runnablThread1.join();
+            runnablThread2.join();
+            lambdaThread.join();
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        }
 
-        // System.out.println("\nAll threads completed!");
+        System.out.println("\nAll threads completed!");
     }
 }
 

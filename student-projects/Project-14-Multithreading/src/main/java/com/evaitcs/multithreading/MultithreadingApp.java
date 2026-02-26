@@ -14,7 +14,7 @@ public class MultithreadingApp {
         System.out.println("============================================\n");
 
         // TODO 1: Run the SimpleThreadDemo
-        // SimpleThreadDemo.demo();
+        SimpleThreadDemo.demo();
 
         System.out.println("\n" + "=".repeat(50) + "\n");
 
