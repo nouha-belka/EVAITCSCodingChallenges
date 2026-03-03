@@ -1,8 +1,9 @@
 package com.evaitcs.springcore.repository;
 
-import com.evaitcs.springcore.model.Recipe;
 import java.util.List;
 import java.util.Optional;
+
+import com.evaitcs.springcore.model.Recipe;
 
 /**
  * ============================================================================
@@ -21,11 +22,11 @@ import java.util.Optional;
 public interface RecipeRepository {
 
     // TODO 1: Declare CRUD methods:
-    //   void save(Recipe recipe);
-    //   Optional<Recipe> findByName(String name);
-    //   List<Recipe> findAll();
-    //   List<Recipe> findByCategory(String category);
-    //   boolean deleteByName(String name);
-    //   long count();
+      void save(Recipe recipe);
+      Optional<Recipe> findByName(String name);
+      List<Recipe> findAll();
+      List<Recipe> findByCategory(String category);
+      boolean deleteByName(String name);
+      long count();
 }
 

@@ -1,5 +1,7 @@
 package com.evaitcs.springcore;
 
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
 /**
  * ============================================================================
  * MAIN APPLICATION: RecipeBookApp
@@ -24,7 +26,7 @@ public class RecipeBookApp {
 
     public static void main(String[] args) {
         System.out.println("\n╔══════════════════════════════════════════╗");
-        System.out.println("║       SPRING RECIPE BOOK                 ║");
+        System.out.println("║       SPRING RECIPE BOOK                  ║");
         System.out.println("╚══════════════════════════════════════════╝\n");
 
         // =====================================================================
@@ -36,8 +38,8 @@ public class RecipeBookApp {
         //     new AnnotationConfigApplicationContext(AppConfig.class);
 
         // ALTERNATIVE: XML config (try this first, then switch to Java config)
-        // ClassPathXmlApplicationContext context =
-        //     new ClassPathXmlApplicationContext("applicationContext.xml");
+        ClassPathXmlApplicationContext context;
+        context = new ClassPathXmlApplicationContext("applicationContext.xml");
 
         // =====================================================================
         // STEP 2: Get beans FROM the container (not with 'new'!)
@@ -86,7 +88,7 @@ public class RecipeBookApp {
         // =====================================================================
 
         // TODO 8: Close the context — watch for the @PreDestroy message!
-        // context.close();
+        context.close();
 
         System.out.println("\nRecipe Book App finished.");
     }

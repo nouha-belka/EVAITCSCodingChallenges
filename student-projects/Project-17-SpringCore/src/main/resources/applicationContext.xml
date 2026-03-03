@@ -22,10 +22,10 @@
     -->
 
     <!-- TODO 1: Define the InMemoryRecipeRepository bean -->
-    <!--
+    
     <bean id="recipeRepository"
           class="com.evaitcs.springcore.repository.InMemoryRecipeRepository" />
-    -->
+   
 
     <!-- TODO 2: Define the RecipeService bean with CONSTRUCTOR INJECTION -->
     <!-- Notice how we reference recipeRepository via constructor-arg -->
