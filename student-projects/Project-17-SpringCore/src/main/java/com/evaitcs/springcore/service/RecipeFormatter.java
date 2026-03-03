@@ -1,9 +1,10 @@
 package com.evaitcs.springcore.service;
 
-// import jakarta.annotation.PostConstruct;
-// import jakarta.annotation.PreDestroy;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
+
+import jakarta.annotation.PostConstruct;
+import jakarta.annotation.PreDestroy;
 
 /**
  * ============================================================================
@@ -41,8 +42,10 @@ public class RecipeFormatter {
      *
      * @PostConstruct
      * public void init() { ... }
-     */
-
+    */
+    @PostConstruct
+    public void init() { System.out.println("RecipeFormatter initialized — ready to format recipes!"); }
+   
     /**
      * TODO 2: Add a @PreDestroy method
      * This runs BEFORE the bean is destroyed (when app shuts down).
@@ -50,7 +53,9 @@ public class RecipeFormatter {
      *
      * @PreDestroy
      * public void cleanup() { ... }
-     */
+    */
+    @PreDestroy
+    public void cleanup() { System.out.println("RecipeFormatter shutting down — cleanup complete."); }
 
     /**
      * TODO 3: Create a format method that returns a nicely formatted recipe string
@@ -63,6 +68,7 @@ public class RecipeFormatter {
     public String format(String name, String category, int servings, String instructions) {
         // TODO: Return a formatted recipe card
         // Example:
+
         // ╔═══════════════════════════╗
         // ║  Chocolate Cake           ║
         // ║  Category: Dessert        ║
@@ -70,7 +76,39 @@ public class RecipeFormatter {
         // ╠═══════════════════════════╣
         // ║  Mix ingredients...       ║
         // ╚═══════════════════════════╝
-        return ""; // Replace
+
+        // Determine the width of the card based on the longest line
+        int maxLength = Math.max(
+            Math.max(name.length(), ("Category: " + category).length()),
+            Math.max(("Servings: " + servings).length(), instructions.length())
+        );
+        //added some space for the borders
+        int width = maxLength + 4; 
+
+        StringBuilder sb = new StringBuilder();
+
+        // Top border
+        sb.append("╔").append("═".repeat(width)).append("╗\n");
+
+        // Recipe name
+        sb.append("║  ").append(String.format("%-" + (width - 2) + "s", name)).append("║\n");
+
+        // Category
+        sb.append("║  ").append(String.format("%-" + (width - 2) + "s", "Category: " + category)).append("║\n");
+
+        // Servings
+        sb.append("║  ").append(String.format("%-" + (width - 2) + "s", "Servings: " + servings)).append("║\n");
+
+        // Separator
+        sb.append("╠").append("═".repeat(width)).append("╣\n");
+
+        // Instructions
+        sb.append("║  ").append(String.format("%-" + (width - 2) + "s", instructions)).append("║\n");
+
+        // Bottom border
+        sb.append("╚").append("═".repeat(width)).append("╝\n");
+
+        return sb.toString();
     }
 }
 
