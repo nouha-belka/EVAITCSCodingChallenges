@@ -1,12 +1,5 @@
 package com.evaitcs.springcore;
 
-import com.evaitcs.springcore.config.AppConfig;
-import com.evaitcs.springcore.model.Recipe;
-import com.evaitcs.springcore.service.RecipeFormatter;
-import com.evaitcs.springcore.service.RecipeService;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-
 /**
  * ============================================================================
  * MAIN APPLICATION: RecipeBookApp
@@ -30,8 +23,8 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 public class RecipeBookApp {
 
     public static void main(String[] args) {
-        System.out.println("╔══════════════════════════════════════════╗");
-        System.out.println("║       SPRING RECIPE BOOK                ║");
+        System.out.println("\n╔══════════════════════════════════════════╗");
+        System.out.println("║       SPRING RECIPE BOOK                 ║");
         System.out.println("╚══════════════════════════════════════════╝\n");
 
         // =====================================================================

@@ -35,17 +35,17 @@ import org.springframework.context.annotation.Configuration;
 // =========================================================================
 // @Configuration
 // public class AppConfig {
-//
+
 //     @Bean
 //     public RecipeRepository recipeRepository() {
 //         return new InMemoryRecipeRepository();
 //     }
-//
+
 //     @Bean
 //     public RecipeService recipeService(RecipeRepository recipeRepository) {
 //         return new RecipeService(recipeRepository);
 //     }
-//
+
 //     @Bean
 //     public RecipeFormatter recipeFormatter() {
 //         return new RecipeFormatter();
@@ -55,25 +55,25 @@ import org.springframework.context.annotation.Configuration;
 // =========================================================================
 // OPTION B: Component scanning (preferred — Spring auto-detects beans)
 // =========================================================================
-@Configuration
-@ComponentScan(basePackages = "com.evaitcs.springcore")
-public class AppConfig {
+// @Configuration
+// @ComponentScan(basePackages = "com.evaitcs.springcore")
+// public class AppConfig {
 
-    // TODO 1: Understand why this class is nearly empty when using @ComponentScan!
-    //
-    // With @ComponentScan, Spring automatically finds classes annotated with:
-    //   @Component, @Service, @Repository, @Controller
-    // in the specified packages and registers them as beans.
-    //
-    // The @Service on RecipeService and @Repository on InMemoryRecipeRepository
-    // are enough — Spring creates the beans and wires them together automatically!
+//     // TODO 1: Understand why this class is nearly empty when using @ComponentScan!
+//     //
+//     // With @ComponentScan, Spring automatically finds classes annotated with:
+//     //   @Component, @Service, @Repository, @Controller
+//     // in the specified packages and registers them as beans.
+//     //
+//     // The @Service on RecipeService and @Repository on InMemoryRecipeRepository
+//     // are enough — Spring creates the beans and wires them together automatically!
 
-    // TODO 2 (BONUS): Add a @Bean method for a custom configuration value
-    // Example: a default category filter
-    //
-    // @Bean
-    // public String defaultCategory() {
-    //     return "All";
-    // }
-}
+//     // TODO 2 (BONUS): Add a @Bean method for a custom configuration value
+//     // Example: a default category filter
+//     //
+//     // @Bean
+//     // public String defaultCategory() {
+//     //     return "All";
+//     // }
+// }
 
