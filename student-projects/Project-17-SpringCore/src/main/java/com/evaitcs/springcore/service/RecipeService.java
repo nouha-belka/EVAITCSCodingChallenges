@@ -3,6 +3,7 @@ package com.evaitcs.springcore.service;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.evaitcs.springcore.model.Recipe;
@@ -43,6 +44,8 @@ public class RecipeService {
 
     // TODO 1: Declare a private final RecipeRepository field
     private final RecipeRepository recipeRepository;
+    @Autowired
+    String defaultCategory;
 
     // TODO 2: Create a constructor with @Autowired that injects RecipeRepository
     //   In Spring 4.3+, @Autowired is optional on single-constructor classes
@@ -57,11 +60,13 @@ public class RecipeService {
      */
     public void addRecipe(Recipe recipe) {
         // TODO: Validate, then save to repository
-        if(recipe.getName().isBlank()){
+        if(!recipe.getName().isBlank()){
             recipeRepository.save(recipe);
             System.out.println("Recipe Saved");
+        }else{
+
+            System.out.println("Recipe not saved : Name is blank!");
         }
-        System.out.println("Recipe not saved : Name is blank!");
     }
 
     /**
@@ -82,7 +87,12 @@ public class RecipeService {
      * TODO 6: Get recipes by category
      */
     public List<Recipe> getRecipesByCategory(String category) {
-        return recipeRepository.findByCategory(category); // Replace
+        if(category.equals(defaultCategory)){
+            return getAllRecipes();
+        }else{
+
+            return recipeRepository.findByCategory(category); // Replace
+        }
     }
 
     /**

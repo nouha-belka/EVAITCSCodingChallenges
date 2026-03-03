@@ -1,9 +1,5 @@
 package com.evaitcs.springcore.config;
 
-import com.evaitcs.springcore.repository.InMemoryRecipeRepository;
-import com.evaitcs.springcore.repository.RecipeRepository;
-import com.evaitcs.springcore.service.RecipeFormatter;
-import com.evaitcs.springcore.service.RecipeService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -55,25 +51,25 @@ import org.springframework.context.annotation.Configuration;
 // =========================================================================
 // OPTION B: Component scanning (preferred — Spring auto-detects beans)
 // =========================================================================
-// @Configuration
-// @ComponentScan(basePackages = "com.evaitcs.springcore")
-// public class AppConfig {
+@Configuration
+@ComponentScan(basePackages = "com.evaitcs.springcore")
+public class AppConfig {
 
-//     // TODO 1: Understand why this class is nearly empty when using @ComponentScan!
-//     //
-//     // With @ComponentScan, Spring automatically finds classes annotated with:
-//     //   @Component, @Service, @Repository, @Controller
-//     // in the specified packages and registers them as beans.
-//     //
-//     // The @Service on RecipeService and @Repository on InMemoryRecipeRepository
-//     // are enough — Spring creates the beans and wires them together automatically!
+    // TODO 1: Understand why this class is nearly empty when using @ComponentScan!
+    //
+    // With @ComponentScan, Spring automatically finds classes annotated with:
+    //   @Component, @Service, @Repository, @Controller
+    // in the specified packages and registers them as beans.
+    //
+    // The @Service on RecipeService and @Repository on InMemoryRecipeRepository
+    // are enough — Spring creates the beans and wires them together automatically!
 
-//     // TODO 2 (BONUS): Add a @Bean method for a custom configuration value
-//     // Example: a default category filter
-//     //
-//     // @Bean
-//     // public String defaultCategory() {
-//     //     return "All";
-//     // }
-// }
+    // TODO 2 (BONUS): Add a @Bean method for a custom configuration value
+    // Example: a default category filter
+    //
+    @Bean
+    public String defaultCategory() {
+        return "All";
+    }
+}
 

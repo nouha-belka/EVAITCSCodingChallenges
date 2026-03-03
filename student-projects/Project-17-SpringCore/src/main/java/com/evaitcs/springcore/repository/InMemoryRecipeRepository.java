@@ -41,18 +41,22 @@ public class InMemoryRecipeRepository implements RecipeRepository {
 
     // TODO 2: Implement all RecipeRepository methods
     //   save()        → recipes.put(recipe.getName(), recipe)
+    @Override
     public void save(Recipe recipe){
         recipes.put(recipe.getName(), recipe);
     }
     //   findByName()  → Optional.ofNullable(recipes.get(name))
+    @Override
     public Optional<Recipe> findByName(String name){
         return Optional.ofNullable(recipes.get(name));
     }
     //   findAll()     → new ArrayList<>(recipes.values())
+    @Override
     public List<Recipe> findAll(){
         return new ArrayList<>(recipes.values());
     }
     //   findByCategory() → filter recipes by category
+    @Override
     public List<Recipe> findByCategory(String category){
         return recipes.values()
                         .stream()
@@ -60,10 +64,12 @@ public class InMemoryRecipeRepository implements RecipeRepository {
                         .toList();
     }
     //   deleteByName() → recipes.remove(name) != null
+    @Override
     public boolean deleteByName(String name){
         return recipes.remove(name) != null;
     }
     //   count()       → recipes.size()
+    @Override
     public long count(){
         return recipes.size();
     }
