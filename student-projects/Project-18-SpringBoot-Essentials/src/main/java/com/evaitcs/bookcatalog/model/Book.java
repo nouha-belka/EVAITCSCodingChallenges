@@ -1,10 +1,20 @@
 package com.evaitcs.bookcatalog.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
 /**
  * ============================================================================
  * CLASS: Book — Simple model/POJO
  * ============================================================================
  */
+
+@AllArgsConstructor
+@Getter
+@Setter
+@ToString
 public class Book {
 
     private Long id;
